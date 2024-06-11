@@ -1,0 +1,19 @@
+FROM: commit 36, problem relativeSortArray.js
+
+NOTES:
+With the help of ChatGPT, I studied and found out how the code could be improved. 
+It taught me 4 things:
+1. Single Pass Processing:
+      - If two functions operate on the same data in sequence, check if you can combine them into a single pass over the data. This reduces the number of iterations and can improve performance.
+            - This is important because in this problem I sorted the data when creating the frequency map, followed by sorting the data when creating the relatively sorted frequency map. It almost makes it seem pointless to sort the original map in the first place, it isn't even used in the end.
+2. Minimize Intermediate Structures:
+      - If one function creates an intermediate data structure (i.e. a map) that another function immediately processes, see if you can avoid the intermediate structure. This can simplify code and reduce memory usage.
+            - This was important because it made me realize that I created 2 maps just to be able to use one of the maps to convert into an array. Noticing this is important because it shows I can find a different way to create the array, not wasting space.
+3. Related Responsibilities:
+      - Functions that perform closely related tasks might be combined if they make logical sense and simplify the code.
+            - This was important because sorting and converting to an array will create the final array. Therefore, combining them would've been a good idea from the start. Whether I could do it or not, is a different question.
+4. Utility Functions:
+      - Functions that operate on data should be focused on their core tasks.
+            - This was important for this problem because originally I was sorting arr1 and creating the frequency map simultaneously. Now this wouldn't be a problem if it weren't for the fact that the end goal was sorting anyway. I should've just created the map and figured out how to sort it and convert it into an array. This makes the code more clear as a bonus.
+
+All of this is tricky, but learning to watch out for it and using these tips will allow me to write better code far faster, then I don't have to improve as often, because ideally,  it'll already be as good as it can get more often. Also, if I know the concept, I can exploit it, I may not know how to improve the code, but dozens of resources do.
