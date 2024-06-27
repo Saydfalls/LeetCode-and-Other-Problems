@@ -5,19 +5,17 @@
  */
 var maxSlidingWindow = function(nums, k) {
     let maxSlidingArray = [];
+    let deque = [];
 
-    let leftPointer = 0;
-    for(let rightPointer = 0; rightPointer < nums.length - k + 1; rightPointer++){
-        let max = -Infinity;
-        while(rightPointer - leftPointer < k){
-            if(nums[rightPointer] > max){
-                max = nums[rightPointer];
+    for(let i = 0; i < nums.length; i++){
+        if(deque.length > 0 && nums[i] > nums[deque[deque.length - 1]]) {
+            for(let j = deque.length - 1; j >= 0; j--){
+                if(nums[i] > nums[deque[j]]) deque.splice(j, 1);
             }
-            rightPointer++;
         }
-        maxSlidingArray.push(max);
-        rightPointer = leftPointer;
-        leftPointer++;
+        deque.push(i);
+        if(deque[0] < (i - k + 1)) deque.shift();
+        if(i >= k - 1) maxSlidingArray.push(nums[deque[0]]);
     }
 
     return maxSlidingArray;
