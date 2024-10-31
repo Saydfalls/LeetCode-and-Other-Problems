@@ -71,10 +71,17 @@ function numToEng(num){
     return finalString;
   }
 
-for(let iterate = 0; iterate < 100; iterate++){
-    let randomNum = Math.floor(Math.random() * 1000);
+  function testPerformance(fn, runs = 100000) {
+    const start = performance.now();
 
-    console.log(randomNum, " is the random number.");
-    console.log(numToEng(randomNum));
-    console.log();
+    for (let i = 0; i < runs; i++) {
+        fn(Math.floor(Math.random() * 1000));  // Run the function multiple times
+    }
+
+    const end = performance.now();
+    const avgTime = (end - start) / runs;  // Calculate average time
+
+    console.log(`Average execution time over ${runs} runs: ${avgTime} ms`);
 }
+
+testPerformance(numToEng);
