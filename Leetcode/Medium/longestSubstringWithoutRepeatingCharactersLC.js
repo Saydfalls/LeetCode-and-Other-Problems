@@ -3,23 +3,22 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    let maxNoDupe = 0;
-    let leftPointer = 0;
-    let dupeTracker = new Map();
-    let maxCompetitor = 0;
+    if(s.length == 0 || s.length == 1) return s.length;
 
-    for(let i = 0; i < s.length; i++){
-        if(dupeTracker.has(s[i])) {
-            dupeTracker = new Map();
-            maxNoDupe = maxNoDupe < maxCompetitor ? maxCompetitor : maxNoDupe;
-            maxCompetitor = 0;
+    let maxLength = 0;
+    let leftPointer = 0;
+    let dupeTracker = new Set();
+
+    for(let rightPointer = 0; rightPointer < s.length; rightPointer++){
+        if(dupeTracker.has(s[rightPointer])) {
+            if(dupeTracker.size > maxLength) maxLength = dupeTracker.size;
+
+            dupeTracker = new Set();
+            rightPointer = leftPointer;
             leftPointer++;
-            i = leftPointer - 1;
         } else {
-            dupeTracker.set(s[i]);
-            maxCompetitor++;
+            dupeTracker.add(s[rightPointer]);
         }
     }
-
-    return maxNoDupe = maxNoDupe < maxCompetitor ? maxCompetitor : maxNoDupe;
+    return dupeTracker.size > maxLength ? dupeTracker.size : maxLength;
 };
